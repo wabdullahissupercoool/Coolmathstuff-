@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Haven | Unblocked Games</title>
+    <style>
+        :root {
+            --bg-color: #0f0f1a;
+            --panel-color: #1a1a2e;
+            --accent-color: #00f2fe;
+            --text-color: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--panel-color);
+            padding: 1rem 2rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Game Stage Area */
+        .game-stage {
+            display: none;
+            background-color: var(--panel-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .game-stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .close-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .iframe-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .iframe-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Grid Setup */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-card {
+            background-color: var(--panel-color);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3);
+            border-color: var(--accent-color);
+        }
+
+        .game-thumbnail {
+            width: 100%;
+            height: 140px;
+            background: #2a2a40;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .game-info {
+            padding: 1rem;
+        }
+
+        .game-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .game-category {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            background-color: var(--panel-color);
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🕹️ Arcade Haven</h1>
+        <p>Clean. Fast. Unblocked.</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Active Game Player Container -->
+        <div class="game-stage" id="gameStage">
+            <div class="game-stage-header">
+                <h2 id="activeGameTitle">Loading Game...</h2>
+                <button class="close-btn" onclick="closeGame()">✕ Close Game</button>
+            </div>
+            <div class="iframe-wrapper">
+                <iframe id="gameFrame" src="" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Catalog Grid -->
+        <div class="game-grid">
+            
+            <!-- Game Card 1 -->
+            <div class="game-card" onclick="loadGame('Slope', 'https://igdb.com')">
+                <div class="game-thumbnail">🔴</div>
+                <div class="game-info">
+                    <div class="game-title">Slope</div>
+                    <div class="game-category">Running / 3D</div>
+                </div>
+            </div>
+
+            <!-- Game Card 2 -->
+            <div class="game-card" onclick="loadGame('Retro Bowl', 'https://igdb.com')">
+                <div class="game-thumbnail">🏈</div>
+                <div class="game-info">
+                    <div class="game-title">Retro Bowl</div>
+                    <div class="game-category">Sports / Retro</div>
+                </div>
+            </div>
+
+            <!-- Game Card 3 -->
+            <div class="game-card" onclick="loadGame('Run 3', 'https://igdb.com')">
+                <div class="game-thumbnail">🏃</div>
+                <div class="game-info">
+                    <div class="game-title">Run 3</div>
+                    <div class="game-category">Skill / Platformer</div>
+                </div>
+            </div>
+
+            <!-- Game Card 4 -->
+            <div class="game-card" onclick="loadGame('Tunnel Rush', 'https://igdb.com')">
+                <div class="game-thumbnail">🌀</div>
+                <div class="game-info">
+                    <div class="game-title">Tunnel Rush</div>
+                    <div class="game-category">Avoid / Arcade</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>Arcade Haven &copy; 2026. Hosted securely via GitHub Pages.</p>
+    </footer>
+
+    <script>
+        const gameStage = document.getElementById('gameStage');
+        const gameFrame = document.getElementById('gameFrame');
+        const activeGameTitle = document.getElementById('activeGameTitle');
+
+        function loadGame(title, url) {
+            activeGameTitle.innerText = title;
+            // NOTE: Replace these placeholder strings with live unblocked iframe links/CDNs 
+            gameFrame.src = url; 
+            gameStage.style.display = 'block';
+            gameStage.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeGame() {
+            gameStage.style.display = 'none';
+            gameFrame.src = '';
+        }
+    </script>
+</body>
+</html>
